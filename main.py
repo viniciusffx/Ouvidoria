@@ -32,3 +32,5 @@ while opcao != 5:
     else:
         print('Fim')
 
+print("teste")
+
