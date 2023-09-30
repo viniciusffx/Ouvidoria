@@ -1,3 +1,5 @@
+from operacoesbd import *
+bancoConexao=abrirBancoDados("127.0.0.1','root','Vini36050.','ouvidoria2.0")
 def menu():
     print()
     print('\nOuvidoria com Metodos\n')
@@ -10,8 +12,11 @@ def listar(manifestacoes):
     if len(manifestacoes) > 0:
         print('\nLista de Manifestos')
 
-        for i in range(len(manifestacoes)):
-            print(i + 1, ')', manifestacoes[i])
+        consultaManifestacoes = 'select * from manifesto'
+        manifesto = listarBancoDados(bancoConexao, consultaManifestacoes)
+
+        for m in manifesto:
+            print(m)
 
     else:
         print('\nSem manifestos cadastrados!')
@@ -61,3 +66,4 @@ def alterar(manifestacoes):
         print('\nsem ocorrencias cadastradas!')
 
     return manifestacoes
+encerrarBancoDados(bancoConexao)

@@ -2,7 +2,7 @@ from metodos import *
 
 manifestacoes = []
 opcao = 1
-
+bancoConexao()
 while opcao != 5:
 
     opcao = menu()
@@ -32,5 +32,5 @@ while opcao != 5:
     else:
         print('Fim')
 
-print("teste")
+encerrarBancoDados(bancoConexao)
 
