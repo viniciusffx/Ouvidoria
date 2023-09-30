@@ -45,3 +45,19 @@ def excluir(manifestacoes):
         print('Sem ocorrencias!')
 
     return manifestacoes
+
+
+def alterar(manifestacoes):
+
+    if len(manifestacoes) > 0:
+
+        alterarManifesto = int(input('\nDigite o manifesto que deseja alterar: '))
+        novoManifesto = input('\nDigite o novo manifesto: ')
+
+        manifestacoes[alterarManifesto - 1] = novoManifesto
+        print('\nManifesto alterado com sucesso!')
+
+    else:
+        print('\nsem ocorrencias cadastradas!')
+
+    return manifestacoes
