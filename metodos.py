@@ -2,70 +2,58 @@ from operacoesbd import *
 
 bancoConexao = abrirBancoDados('127.0.0.1','root','Vini36050.','ouvidoria2.0')
 
-def menu():
-    print()
-    print('\nOuvidoria com Metodos\n')
-    print('1)Listar\n2)Cadastrar\n3)Excluir\n4)Alterar\n5)Sair')
-    opcao = int(input('\nDigite a opcao desejada: '))
-    return opcao
 
 
-def listar(manifestacoes):
-    if len(manifestacoes) > 0:
-        print('\nLista de Manifestos')
+def listar(bancoConexao):
 
-        consultaManifestacoes = 'select * from manifestacoes'
-        manifesto = listarBancoDados(bancoConexao, consultaManifestacoes)
+    print('\nLista de Manifestos\n')
 
-        for m in manifesto:
-            print(m)
+    sqlListarManifestos = 'select * from manifestacoes'
+    manifestos = listarBancoDados(bancoConexao, sqlListarManifestos)
 
-    else:
-        print('\nSem manifestos cadastrados!')
-
-    return manifestacoes
+    for i in range(len(manifestos)):
+        print(manifestos[i][0], ')', manifestos[i][1])
 
 
 def cadastrar(manifestacoes):
-    cadastroManifesto = input('\nDigite sua ocorrencia: ')
 
-    if len(cadastroManifesto) > 0:
+    print('\nCadastro de Manifestações')
 
-        manifestacoes.append(cadastroManifesto)
-        print('\nOcorrencia cadastrada com sucesso!')
+    cadastroManisfestacao = input('Digite sua ocorrência: ')
 
+    if len(cadastroManisfestacao) > 0:
+
+        sqlCadastrarManifesto = 'insert into manifestacoes(manifestos) values (%s)'
+        dados = [cadastroManisfestacao]
+        insertNoBancoDados(bancoConexao, sqlCadastrarManifesto, dados)
     else:
-        print('Sem caracteres digitados!')
+        print('Opção Inválida')
 
     return manifestacoes
 
 
 def excluir(manifestacoes):
-    if len(manifestacoes) > 0:
 
-        removerManifesto = int(input('\nDigite a ocorrencia que deseja remover: '))
+    opcaoRemover = int(input('Digite o manifesto a ser removido: '))
 
-        manifestacoes.pop(removerManifesto - 1)
-        print('\nManifesto removido com sucesso!')
+    dados = [opcaoRemover]
 
-    else:
-        print('Sem ocorrencias!')
+    sqlRemoverManifesto = 'DELETE FROM manifestacoes WHERE codigo = %s'
+    excluirBancoDados(bancoConexao, sqlRemoverManifesto, dados)
+    print('Manifestação removida com sucesso!')
 
     return manifestacoes
 
-
 def alterar(manifestacoes):
 
-    if len(manifestacoes) > 0:
+    opcaoAlterar = int(input('Digite o codigo manifesto a ser Alterado: '))
+    novoManifesto = input('Digite o novo manifesto')
 
-        alterarManifesto = int(input('\nDigite o manifesto que deseja alterar: '))
-        novoManifesto = input('\nDigite o novo manifesto: ')
+    dados = [novoManifesto, opcaoAlterar]
 
-        manifestacoes[alterarManifesto - 1] = novoManifesto
-        print('\nManifesto alterado com sucesso!')
-
-    else:
-        print('\nsem ocorrencias cadastradas!')
+    atualizacaoDeManifesto = 'UPDATE manifestacoes SET manifestos = %s WHERE codigo =%s ;'
+    atualizarBancoDados(bancoConexao, atualizacaoDeManifesto, dados)
+    print('\nManifesto alterado com sucesso!\n')
 
     return manifestacoes
 
