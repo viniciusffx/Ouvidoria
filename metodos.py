@@ -15,7 +15,7 @@ def listar(bancoConexao):
         print(manifestos[i][0], ')', manifestos[i][1])
 
 
-def cadastrar(manifestacoes):
+def cadastrar(bancoConexao):
 
     print('\nCadastro de Manifestações')
 
@@ -29,10 +29,8 @@ def cadastrar(manifestacoes):
     else:
         print('Opção Inválida')
 
-    return manifestacoes
 
-
-def excluir(manifestacoes):
+def excluir(bancoConexao):
 
     opcaoRemover = int(input('Digite o manifesto a ser removido: '))
 
@@ -42,9 +40,8 @@ def excluir(manifestacoes):
     excluirBancoDados(bancoConexao, sqlRemoverManifesto, dados)
     print('Manifestação removida com sucesso!')
 
-    return manifestacoes
 
-def alterar(manifestacoes):
+def alterar(bancoConexao):
 
     opcaoAlterar = int(input('Digite o codigo manifesto a ser Alterado: '))
     novoManifesto = input('Digite o novo manifesto')
@@ -55,6 +52,5 @@ def alterar(manifestacoes):
     atualizarBancoDados(bancoConexao, atualizacaoDeManifesto, dados)
     print('\nManifesto alterado com sucesso!\n')
 
-    return manifestacoes
 
 encerrarBancoDados(bancoConexao)

@@ -1,10 +1,8 @@
+from metodos import *
 from operacoesbd import *
 
 bancoConexao = abrirBancoDados('127.0.0.1','root','Vini36050.','ouvidoria2.0')
 
-from metodos import *
-
-manifestacoes = []
 opcao = 1
 
 while opcao != 5:
@@ -17,21 +15,21 @@ while opcao != 5:
 
     if opcao == 1:
 
-        listar(manifestacoes)
+        listar(bancoConexao)
 
     elif opcao == 2:
 
-        cadastrar(manifestacoes)
+        cadastrar(bancoConexao)
 
     elif opcao == 3:
 
-        listar(manifestacoes)
-        excluir(manifestacoes)
+        listar(bancoConexao)
+        excluir(bancoConexao)
 
     elif opcao == 4:
 
-        listar(manifestacoes)
-        alterar(manifestacoes)
+        listar(bancoConexao)
+        alterar(bancoConexao)
 
     elif opcao != 5:
         print('Opção inválida!')
