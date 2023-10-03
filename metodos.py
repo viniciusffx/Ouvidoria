@@ -1,6 +1,6 @@
 from operacoesbd import *
 
-bancoConexao = abrirBancoDados('127.0.0.1','root','Vini36050.','ouvidoria2.0')
+bancoConexao = abrirBancoDados('127.0.0.1','root','Vini36050.','ouvidoria2')
 
 
 
@@ -12,40 +12,51 @@ def listar(bancoConexao):
     manifestos = listarBancoDados(bancoConexao, sqlListarManifestos)
 
     for i in range(len(manifestos)):
-        print(manifestos[i][0], ')', manifestos[i][1])
+        print(manifestos[i][0], ')','Usuário:',manifestos[i][1],'\n    Manifesto:',manifestos[i][2])
 
 
 def cadastrar(bancoConexao):
 
     print('\nCadastro de Manifestações')
 
-    cadastroManisfestacao = input('Digite sua ocorrência: ')
-    cadastroUsuarios=input('Digite seu nome:')
+    cadastroUsuarios = input('\nDigite seu nome: ')
+    cadastroManisfestacao = input('\nDigite sua ocorrência: ')
 
     if len(cadastroManisfestacao) > 0:
 
-        sqlCadastrarManifesto = 'insert into manifestacoes(manifestos,usuarios) values (%s,%s)'
-        dados = [cadastroManisfestacao,cadastroUsuarios]
+        sqlCadastrarManifesto = 'insert into manifestacoes(usuarios,manifestos) values (%s,%s)'
+        dados = [cadastroUsuarios,cadastroManisfestacao]
         insertNoBancoDados(bancoConexao, sqlCadastrarManifesto, dados)
+        print('\nCadastro feito com sucesso!')
+
     else:
         print('Opção Inválida')
 
 
 def excluir(bancoConexao):
 
-    opcaoRemover = int(input('Digite o manifesto a ser removido: '))
+    opcaoRemover = int(input('\nDigite o codigo do manifesto a ser removido: '))
 
     dados = [opcaoRemover]
 
     sqlRemoverManifesto = 'DELETE FROM manifestacoes WHERE codigo = %s'
     excluirBancoDados(bancoConexao, sqlRemoverManifesto, dados)
-    print('Manifestação removida com sucesso!')
+    print('\nManifestação removida com sucesso!')
 
+def excluirPorUsuarios(bancoConexao):
+
+    opcaoRemover = input('\nDigite o usuário que deseja excluir os manifestos: ')
+
+    dados = [opcaoRemover]
+
+    sqlRemoverManifestoPorUsuario = 'DELETE FROM manifestacoes WHERE usuarios like %s'
+    excluirBancoDados(bancoConexao,sqlRemoverManifestoPorUsuario,dados)
+    print('\nManifestação removida com sucesso!')
 
 def alterar(bancoConexao):
 
-    opcaoAlterar = int(input('Digite o codigo manifesto a ser Alterado: '))
-    novoManifesto = input('Digite o novo manifesto')
+    opcaoAlterar = int(input('\nDigite o codigo do manifesto a ser alterado: '))
+    novoManifesto = input('\nDigite o novo manifesto: ')
 
     dados = [novoManifesto, opcaoAlterar]
 

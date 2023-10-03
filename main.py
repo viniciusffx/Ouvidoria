@@ -1,15 +1,15 @@
 from metodos import *
 from operacoesbd import *
 
-bancoConexao = abrirBancoDados('127.0.0.1','root','Vini36050.','ouvidoria2.0')
+bancoConexao = abrirBancoDados('127.0.0.1','root','Vini36050.','ouvidoria2')
 
 opcao = 1
 
-while opcao != 5:
+while opcao != 6:
 
     print()
     print('\nOuvidoria com Metodos\n')
-    print('1)Listar\n2)Cadastrar\n3)Excluir\n4)Alterar\n5)Sair')
+    print('1)Listar\n2)Cadastrar\n3)Excluir por código\n4)Excluir por Usuário\n5)Alterar por código\n6)Sair')
     opcao = int(input('\nDigite a opcao desejada: '))
 
 
@@ -29,9 +29,14 @@ while opcao != 5:
     elif opcao == 4:
 
         listar(bancoConexao)
+        excluirPorUsuarios(bancoConexao)
+
+    elif opcao == 5:
+
+        listar(bancoConexao)
         alterar(bancoConexao)
 
-    elif opcao != 5:
+    elif opcao != 6:
         print('Opção inválida!')
 
 
