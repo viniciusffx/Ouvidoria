@@ -20,11 +20,12 @@ def cadastrar(bancoConexao):
     print('\nCadastro de Manifestações')
 
     cadastroManisfestacao = input('Digite sua ocorrência: ')
+    cadastroUsuarios=input('Digite seu nome:')
 
     if len(cadastroManisfestacao) > 0:
 
-        sqlCadastrarManifesto = 'insert into manifestacoes(manifestos) values (%s)'
-        dados = [cadastroManisfestacao]
+        sqlCadastrarManifesto = 'insert into manifestacoes(manifestos,usuarios) values (%s,%s)'
+        dados = [cadastroManisfestacao,cadastroUsuarios]
         insertNoBancoDados(bancoConexao, sqlCadastrarManifesto, dados)
     else:
         print('Opção Inválida')
