@@ -9,7 +9,7 @@ while opcao != 6:
 
     print()
     print('\nOuvidoria com Metodos\n')
-    print('1)Listar\n2)Cadastrar\n3)Listar por usuario\n4)Excluir por código\n5)Excluir por Usuário\n6)Alterar por código\n7)Sair')
+    print('1)Listar\n2)Cadastrar\n3)Excluir por código\n4)Excluir por Usuário\n5)Alterar por código\n6)Sair')
     opcao = int(input('\nDigite a opcao desejada: '))
 
 
@@ -22,24 +22,21 @@ while opcao != 6:
         cadastrar(bancoConexao)
 
     elif opcao == 3:
-        listarPorUsuario(bancoConexao)
-
-    elif opcao == 4:
 
         listar(bancoConexao)
         excluir(bancoConexao)
 
-    elif opcao == 5:
+    elif opcao == 4:
 
         listar(bancoConexao)
         excluirPorUsuarios(bancoConexao)
 
-    elif opcao == 6:
+    elif opcao == 5:
 
         listar(bancoConexao)
         alterar(bancoConexao)
 
-    elif opcao != 7:
+    elif opcao != 6:
         print('Opção inválida!')
 
 

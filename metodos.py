@@ -64,7 +64,7 @@ def alterar(bancoConexao):
     atualizarBancoDados(bancoConexao, atualizacaoDeManifesto, dados)
     print('\nManifesto alterado com sucesso!\n')
 
-
+'''
 def listarPorUsuario(bancoConexao):
 
     opcaolistarPorUsuario = input('Digite o usuário para pesquisar seu manifesto: ')
@@ -73,6 +73,6 @@ def listarPorUsuario(bancoConexao):
 
     for i in range(len(sqlPesquisaPorUsuario)):
         print(sqlPesquisaPorUsuario[i][0], ')', 'Usuário:', sqlPesquisaPorUsuario[i][1], '\n    Manifesto:', sqlPesquisaPorUsuario[i][2])
-
+'''
 
 encerrarBancoDados(bancoConexao)
