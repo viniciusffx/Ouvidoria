@@ -3,7 +3,7 @@ Sistema de Ouvidoria usando MySQL e Métodos
 
 Sistema de Listagem Geral 
 
-sistema de Pesquisar Manifesto por Usuario
+Sistema de Pesquisar Manifesto por Usuario
 
 Criação de Manifestações
 
