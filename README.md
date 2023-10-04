@@ -1,13 +1,15 @@
 # Ouvidoria
 Sistema de Ouvidoria usando MySQL e Métodos
 
-Sistema de Listagem Geral e Individual 
+Sistema de Listagem Geral 
+
+sistema de Pesquisar Manifesto por Usuario
 
 Criação de Manifestações
 
 Cadastro de Manifesto e Usuario 
 
-Excluir por Codigo ou Usuario
+Excluir por Codigo ou por  Usuario
 
 Alteração de Manifesto
 
