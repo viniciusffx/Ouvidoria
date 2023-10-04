@@ -10,7 +10,10 @@ def listar(bancoConexao):
 
     sqlListarManifestos = 'select * from manifestacoes'
     manifestos = listarBancoDados(bancoConexao, sqlListarManifestos)
-
+    quantidade= manifestos[0][0]
+    if quantidade ==0:
+        print('Não existem manifestações cadastradas!')
+    else:
     for i in range(len(manifestos)):
         print(manifestos[i][0], ')','Usuário:',manifestos[i][1],'\n    Manifesto:',manifestos[i][2])
 
