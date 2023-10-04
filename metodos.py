@@ -10,12 +10,13 @@ def listar(bancoConexao):
 
     sqlListarManifestos = 'select * from manifestacoes'
     manifestos = listarBancoDados(bancoConexao, sqlListarManifestos)
-    quantidade= manifestos[0][0]
-    if quantidade ==0:
-        print('Não existem manifestações cadastradas!')
+
+    if len(manifestos) == 0:
+        print('Sem manifestações e usuários cadastrados!')
+
     else:
-    for i in range(len(manifestos)):
-        print(manifestos[i][0], ')','Usuário:',manifestos[i][1],'\n    Manifesto:',manifestos[i][2])
+        for i in range(len(manifestos)):
+            print(manifestos[i][0], ')','Usuário:',manifestos[i][1],'\n    Manifesto:',manifestos[i][2])
 
 
 def cadastrar(bancoConexao):
@@ -28,55 +29,101 @@ def cadastrar(bancoConexao):
     if len(cadastroManisfestacao) > 0:
 
         sqlCadastrarManifesto = 'insert into manifestacoes(usuarios,manifestos) values (%s,%s)'
+
         dados = [cadastroUsuarios,cadastroManisfestacao]
         insertNoBancoDados(bancoConexao, sqlCadastrarManifesto, dados)
-        print('\nCadastro feito com sucesso!')
+        print('\nUsuário e manifesto cadastrados com sucesso!')
 
     else:
-        print('Opção Inválida')
-
-
-def excluir(bancoConexao):
-
-    opcaoRemover = int(input('\nDigite o codigo do manifesto a ser removido: '))
-
-    dados = [opcaoRemover]
-
-    sqlRemoverManifesto = 'DELETE FROM manifestacoes WHERE codigo = %s'
-    excluirBancoDados(bancoConexao, sqlRemoverManifesto, dados)
-    print('\nManifestação removida com sucesso!')
-
-def excluirPorUsuarios(bancoConexao):
-
-    opcaoRemover = input('\nDigite o usuário que deseja excluir os manifestos: ')
-
-    dados = [opcaoRemover]
-
-    sqlRemoverManifestoPorUsuario = 'DELETE FROM manifestacoes WHERE usuarios like %s'
-    excluirBancoDados(bancoConexao,sqlRemoverManifestoPorUsuario,dados)
-    print('\nManifestação removida com sucesso!')
-
-def alterar(bancoConexao):
-
-    opcaoAlterar = int(input('\nDigite o codigo do manifesto a ser alterado: '))
-    novoManifesto = input('\nDigite o novo manifesto: ')
-
-    dados = [novoManifesto, opcaoAlterar]
-
-    atualizacaoDeManifesto = 'UPDATE manifestacoes SET manifestos = %s WHERE codigo =%s ;'
-    atualizarBancoDados(bancoConexao, atualizacaoDeManifesto, dados)
-    print('\nManifesto alterado com sucesso!\n')
-
+        print('Opção Inválida!')
 
 def listarPorUsuario(bancoConexao):
 
-    opcaolistarPorUsuario = input('Digite o usuário para pesquisar seu manifesto: ')
-    opcaolistarPorUsuario= '\n'+opcaolistarPorUsuario+'\n'
-    sqlPesquisaPorUsuario = 'select * from manifestacoes WHERE usuarios LIKE ' + opcaolistarPorUsuario
-    manifesto=listarBancoDados(bancoConexao,sqlPesquisaPorUsuario)
+    sqlListarManifestos = 'select * from manifestacoes'
+    manifestos = listarBancoDados(bancoConexao,sqlListarManifestos)
 
-    for i in range(len(manifesto)):
-        print(manifesto[i][0], ')', 'Usuário:', manifesto[i][1], '\n    Manifesto:', manifesto[i][2])
+    if len(manifestos) == 0:
+        print('\nSem manifestos e usuários cadastrados!')
+
+    else:
+
+        opcaolistarPorUsuario = input('Digite o usuário para pesquisar seu manifesto: ')
+        opcaolistarPorUsuario = '\'' + opcaolistarPorUsuario + '\''
+
+        sqlPesquisaPorUsuario = 'select * from manifestacoes WHERE usuarios = ' + opcaolistarPorUsuario
+
+        manifestos = listarBancoDados(bancoConexao, sqlPesquisaPorUsuario)
+
+        for i in range(len(manifestos)):
+            print(manifestos[i][0], ')', 'Usuário:', manifestos[i][1], '\n    Manifesto:', manifestos[i][2])
+
+def excluir(bancoConexao):
+
+    print('\nLista de Manifestos\n')
+
+    sqlListarManifestos = 'select * from manifestacoes'
+    manifestos = listarBancoDados(bancoConexao, sqlListarManifestos)
+
+    if len(manifestos) == 0:
+        print('Sem manifestações e usuários cadastrados!')
+
+    else:
+        for i in range(len(manifestos)):
+            print(manifestos[i][0], ')','Usuário:',manifestos[i][1],'\n    Manifesto:',manifestos[i][2])
+
+        opcaoRemover = int(input('\nDigite o código do manifesto a ser removido: '))
+
+        sqlRemoverManifesto = 'DELETE FROM manifestacoes WHERE codigo = %s'
+        dados = [opcaoRemover]
+
+        excluirBancoDados(bancoConexao, sqlRemoverManifesto, dados)
+        print('\nManifestação removida com sucesso!')
+
+def excluirPorUsuarios(bancoConexao):
+
+    print('\nLista de Manifestos\n')
+
+    sqlListarManifestos = 'select * from manifestacoes'
+    manifestos = listarBancoDados(bancoConexao, sqlListarManifestos)
+
+    if len(manifestos) == 0:
+        print('Sem manifestações e usuários cadastrados!')
+
+    else:
+        for i in range(len(manifestos)):
+            print(manifestos[i][0], ')', 'Usuário:', manifestos[i][1], '\n    Manifesto:', manifestos[i][2])
+
+        opcaoRemover = input('\nDigite o usuário que deseja excluir os manifestos: ')
+
+        dados = [opcaoRemover]
+
+        sqlRemoverManifestoPorUsuario = 'DELETE FROM manifestacoes WHERE usuarios like %s'
+        excluirBancoDados(bancoConexao,sqlRemoverManifestoPorUsuario,dados)
+        print('\nUsuário e manifesto removidos com sucesso!')
+
+def alterar(bancoConexao):
+
+    print('\nLista de Manifestos\n')
+
+    sqlListarManifestos = 'select * from manifestacoes'
+    manifestos = listarBancoDados(bancoConexao, sqlListarManifestos)
+
+    if len(manifestos) == 0:
+        print('Sem manifestações e usuários cadastrados!')
+
+    else:
+
+        for i in range(len(manifestos)):
+            print(manifestos[i][0], ')', 'Usuário:', manifestos[i][1], '\n    Manifesto:', manifestos[i][2])
+
+        opcaoAlterar = int(input('\nDigite o codigo do manifesto a ser alterado: '))
+        novoManifesto = input('\nDigite o novo manifesto: ')
+
+        dados = [novoManifesto, opcaoAlterar]
+
+        atualizacaoDeManifesto = 'UPDATE manifestacoes SET manifestos = %s WHERE codigo =%s ;'
+        atualizarBancoDados(bancoConexao, atualizacaoDeManifesto, dados)
+        print('\nManifesto alterado com sucesso!\n')
 
 
 encerrarBancoDados(bancoConexao)
