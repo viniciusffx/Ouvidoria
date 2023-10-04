@@ -14,5 +14,5 @@ Excluir por Codigo ou por  Usuario
 Alteração de Manifesto
 
 
-by (Jose Miguel, Vinicius Oliveira, Allyson Albquerque e Emanoel)
+by (Jose Miguel, Vinicius Oliveira, Allyson Albquerque e Emanoel Ryan)
 
